@@ -1,0 +1,33 @@
+import java.util.Arrays;
+
+public class Solution {
+    public static int sockMerchant(int n, int[] ar) {
+        // Sort the array
+        Arrays.sort(ar);
+        
+        int count = 1;
+        int pair = 0;
+        
+        for (int i = 0; i < n - 1; i++) {
+            // Check if current sock matches the next sock
+            if (ar[i] == ar[i + 1]) {
+                count++;
+            } else {
+                // Calculate pairs and reset count
+                pair += count / 2;
+                count = 1;  // reset count for the next sock type
+            }
+        }
+        // After the loop, add the pairs from the last count
+        pair += count / 2;
+        
+        return pair;
+    }
+
+    public static void main(String[] args) {
+        int[] ar = {10, 20, 20, 10, 10, 30, 50, 10, 20};
+        int n = ar.length;
+        int result = sockMerchant(n, ar);
+        System.out.println(result); // Output should be 3
+    }
+}
